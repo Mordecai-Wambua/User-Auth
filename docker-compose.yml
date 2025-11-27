@@ -1,0 +1,9 @@
+services:
+  web:
+    image: user-auth
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.prod
+    restart: always

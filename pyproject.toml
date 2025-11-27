@@ -1,0 +1,16 @@
+[project]
+name = "user-auth"
+version = "0.1.0"
+description = "User Authentication and Authorization"
+requires-python = ">=3.13"
+dependencies = [
+    "dj-database-url>=3.0.1",
+    "django>=5.2.8",
+    "django-anymail[resend]>=13.1",
+    "django-cors-headers>=4.9.0",
+    "django-environ>=0.12.0",
+    "django-filter>=25.2",
+    "drf-auth-kit[social]>=0.3.10",
+    "gunicorn>=23.0.0",
+    "psycopg2>=2.9.11",
+]
