@@ -2,7 +2,7 @@
 substitutions:
   _REGION: europe-west1
   _PROJECT_ID: auth-demo-479410
-  _IMAGE_REPO_PATH: europe-west1-docker.pkg.dev/${_PROJECT_ID}/quota-repo/backend
+  _IMAGE_REPO_PATH: europe-west1-docker.pkg.dev/${_PROJECT_ID}/user_auth_repo/backend
   _SERVICE_ACCOUNT_EMAIL: 40515463332-compute@developer.gserviceaccount.com
   _SQL_INSTANCE: ${_PROJECT_ID}:${_REGION}:django-db
 
