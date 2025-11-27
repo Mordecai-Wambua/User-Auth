@@ -2,7 +2,7 @@
 substitutions:
   _REGION: europe-west1
   _PROJECT_ID: auth-demo-479410
-  _IMAGE_PATH: europe-west1-docker.pkg.dev/${_PROJECT_ID}/quota-repo/backend:$COMMIT_SHA
+  _IMAGE_REPO_PATH: europe-west1-docker.pkg.dev/${_PROJECT_ID}/quota-repo/backend
   _SERVICE_ACCOUNT_EMAIL: 40515463332-compute@developer.gserviceaccount.com
   _SQL_INSTANCE: ${_PROJECT_ID}:${_REGION}:django-db
 
@@ -13,13 +13,13 @@ steps:
   args:
     - 'build'
     - '-t'
-    - '${_IMAGE_PATH}'
+    - '${_IMAGE_REPO_PATH}:$COMMIT_SHA'
     - '.'
 
 # 2. Push the Image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
   id: Push-Image
-  args: ['push', '${_IMAGE_PATH}']
+  args: ['push', '${_IMAGE_REPO_PATH}:$COMMIT_SHA']
 
 # 3. Run Database Migrations (Critical Pre-Deployment Step)
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -33,7 +33,7 @@ steps:
   - --region
   - ${_REGION}
   - --image
-  - ${_IMAGE_PATH}
+  - '${_IMAGE_REPO_PATH}:$COMMIT_SHA'
   - --wait
   - --command
   - python manage.py migrate
@@ -55,7 +55,7 @@ steps:
   - --region
   - ${_REGION}
   - --image
-  - ${_IMAGE_PATH}
+  - '${_IMAGE_REPO_PATH}:$COMMIT_SHA'
   - --platform
   - managed
   - --allow-unauthenticated
